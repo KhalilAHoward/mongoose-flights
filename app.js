@@ -5,7 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var flightsRouter = require('./routes/flights'); //requires router module
+var flightsRouter = require('./routes/flights');
+var destinationRouter = require('./routes/destinations');
+var ticketsRouter = require('./routes/tickets');
+
 var app = express(); // creates an instance of an express app stored in the 'app' variable
 
 //connect to the database with Mongoose
@@ -22,7 +25,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/flights', flightsRouter); // <- defining the starting endpoint(url) for the entire router
+app.use('/flights', flightsRouter);
+app.use('/', destinationRouter);
+app.use('/', ticketsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
