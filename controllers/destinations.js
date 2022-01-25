@@ -7,9 +7,10 @@ module.exports = {
 function create(req, res){
 	Flight.findById(req.params.id, function(err, flightDocument){
 		flightDocument.destinations.push(req.body);
-		flightDocument.save(function(err){
+		flightDocument.save(function(err) {
 			res.redirect(`/flights/${flightDocument._id}`)
-		})
+		});
 	
-	})
-}
+	});
+};
+
